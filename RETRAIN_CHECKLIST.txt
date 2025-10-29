@@ -1,0 +1,69 @@
+================================================================================
+                        RETRAIN CHECKLIST
+================================================================================
+
+BEFORE YOU START:
+-----------------
+[✓] EOS token fix applied to phase2_student_training.py
+[✓] Dataset exists: trd_framework/large_dataset/physics_large_dataset.jsonl
+[✓] WSL environment set up with venv_test
+[✓] Batch files created for easy execution
+
+RETRAIN PROCESS:
+----------------
+[ ] Step 1: Run trd_framework\RETRAIN_FIXED_WINDOWS.bat
+    - Expected time: ~35 minutes
+    - Watch for: "✓ Set pad_token = eos_token for proper stopping behavior"
+    - Output: trd_framework/models/qwen2-1.5b-1k-fixed
+
+[ ] Step 2: Verify training completed successfully
+    - Check for: "TRAINING COMPLETE!" message
+    - Model files created in output directory
+
+[ ] Step 3: Test the fixed model
+    - Run: trd_framework\TEST_FIXED_MODEL.bat
+    - Choose Examples Mode first
+    - Verify: Model stops cleanly after each response
+
+[ ] Step 4: Test interactively
+    - Run: trd_framework\TEST_FIXED_MODEL.bat
+    - Choose Interactive Mode
+    - Ask: "what is quantum physics"
+    - Verify: No hallucinated conversations
+
+SUCCESS CRITERIA:
+-----------------
+[✓] Model generates structured reasoning (Initial Thought → Chain → Flaws → Correction → Final Answer)
+[✓] Model stops after completing response
+[✓] No hallucinated "Human:" or "Assistant:" continuations
+[✓] Interactive mode waits for next query
+
+TROUBLESHOOTING:
+----------------
+If training fails:
+  - Check CUDA memory (reduce --batch-size to 1 if needed)
+  - Verify dataset path is correct
+  - Ensure WSL environment is activated
+
+If model still doesn't stop:
+  - Check training logs for "Set pad_token = eos_token" message
+  - Verify phase2_student_training.py has both fixes
+  - Ensure you're testing the NEW model (qwen2-1.5b-1k-fixed)
+
+COMPARISON:
+-----------
+Old Model: trd_framework/models/qwen2-1.5b-1k (has stopping issue)
+New Model: trd_framework/models/qwen2-1.5b-1k-fixed (stopping fixed)
+
+DOCUMENTATION:
+--------------
+- START_HERE.txt - Quick start guide
+- FIX_APPLIED_README.md - Detailed explanation
+- trd_framework/TECHNICAL_DETAILS.md - Technical deep dive
+- RETRAIN_CHECKLIST.txt - This file
+
+READY TO START:
+---------------
+Double-click: trd_framework\RETRAIN_FIXED_WINDOWS.bat
+
+================================================================================

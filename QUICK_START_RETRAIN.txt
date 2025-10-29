@@ -1,0 +1,52 @@
+================================================================================
+QUICK START: Retrain TRD Model with EOS Token Fix
+================================================================================
+
+PROBLEM FIXED:
+--------------
+Your model learned structured reasoning but doesn't stop generating.
+It hallucinates continued conversations after completing responses.
+
+SOLUTION:
+---------
+Added EOS (End-of-Sequence) tokens to training data so model learns when to stop.
+
+HOW TO RETRAIN:
+---------------
+
+Option 1: Windows Batch File (EASIEST)
+---------------------------------------
+Double-click: trd_framework\RETRAIN_FIXED_WINDOWS.bat
+
+Option 2: Manual Command
+-------------------------
+wsl bash -c "cd '/mnt/c/Users/windows/Documents/rishi - professor' && source venv_test/bin/activate && python trd_framework/run_phase2_training.py --dataset trd_framework/large_dataset/physics_large_dataset.jsonl --output-dir trd_framework/models/qwen2-1.5b-1k-fixed --batch-size 2 --gradient-accumulation 8 --epochs 3"
+
+TIME REQUIRED:
+--------------
+~35 minutes (same as before)
+
+AFTER TRAINING:
+---------------
+Test the fixed model:
+  Double-click: trd_framework\TEST_FIXED_MODEL.bat
+
+WHAT TO EXPECT:
+---------------
+Before: Model generates good responses but continues hallucinating
+After:  Model generates good responses and STOPS cleanly
+
+The structured reasoning quality stays the same - you just fix stopping behavior.
+
+FILES MODIFIED:
+---------------
+- trd_framework/phase2_student_training.py (EOS token fixes applied)
+
+NEW FILES CREATED:
+------------------
+- trd_framework/RETRAIN_FIXED_WINDOWS.bat (retrain script)
+- trd_framework/TEST_FIXED_MODEL.bat (test script)
+- FIX_APPLIED_README.md (detailed documentation)
+- QUICK_START_RETRAIN.txt (this file)
+
+================================================================================

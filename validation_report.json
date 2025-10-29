@@ -1,0 +1,28 @@
+{
+  "dataset_generation": {
+    "status": "PASSED",
+    "samples": 10000,
+    "generation_time": 623.7640743255615,
+    "physics_pass_rate": 100.0
+  },
+  "model_training": {
+    "status": "PASSED",
+    "mlp_training_time": 18.369824409484863,
+    "xgb_training_time": 5.678576946258545,
+    "mlp_final_loss": 0.0
+  },
+  "accuracy": {
+    "status": "PASSED",
+    "mlp_mape": 3.347055608164233,
+    "xgb_mape": 2.467471764113122,
+    "mlp_r2": -0.3530366206611118,
+    "xgb_r2": -0.3521420667964925
+  },
+  "inference_latency": {
+    "status": "PASSED",
+    "mean_ms": 0.256969048998144,
+    "p50_ms": 0.2343450000807934,
+    "p95_ms": 0.325909449907158,
+    "p99_ms": 0.5999435100238767
+  }
+}

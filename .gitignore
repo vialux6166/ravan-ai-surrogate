@@ -1,0 +1,16 @@
+\n# Python\n__pycache__/\n*.pyc\n*.pyo\n*.pyd\n.venv/\n.env/\nvenv/\n\n# Data and models\n*.h5\n*.hdf5\nmodels/**/*.pt\nmodels/**/*.engine\nmodels/**/*.onnx\nmodels/**/metrics.json\n\n# OS / IDE\n.DS_Store\nThumbs.db\n.idea/\n.vscode/\n\n# Node/streamlit cache\n.streamlit/\n
+
+# Virtual env
+venv_test/**
+.venv/**
+
+# Docs build
+docs/_build/**
+
+# Models artifacts
+models/**
+!models/worldclass_quantum_ai/config.json
+!models/worldclass_quantum_ai/metrics.json
+
+# OS/Cache
+*.log

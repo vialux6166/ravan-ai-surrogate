@@ -1,0 +1,31 @@
+{
+  "optimal_batch_size": 1024,
+  "use_persistent_workers": true,
+  "use_torchscript": true,
+  "batch_results": {
+    "32": {
+      "throughput": 8288.413513245136,
+      "gpu_mem": 0.018953216
+    },
+    "64": {
+      "throughput": 25755.963963300106,
+      "gpu_mem": 0.019022848
+    },
+    "128": {
+      "throughput": 44353.95464729715,
+      "gpu_mem": 0.019272704
+    },
+    "256": {
+      "throughput": 68500.80026130982,
+      "gpu_mem": 0.019772928
+    },
+    "512": {
+      "throughput": 104176.22239539512,
+      "gpu_mem": 0.02084608
+    },
+    "1024": {
+      "throughput": 126015.14986498818,
+      "gpu_mem": 0.02382336
+    }
+  }
+}

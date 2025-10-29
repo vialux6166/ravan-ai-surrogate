@@ -1,0 +1,100 @@
+================================================================================
+                    RAVAN-TRD GUI - QUICK START GUIDE
+================================================================================
+
+LAUNCH THE GUI:
+---------------
+Double-click: LAUNCH_GUI.bat
+
+Or run: python ravan_trd_gui.py
+
+FIRST TIME SETUP:
+-----------------
+The GUI will automatically install PyQt6 if needed.
+
+MAIN FEATURES:
+--------------
+
+1. RAVAN QUANTUM TAB (🔬)
+   - Run quantum simulations
+   - Configure simulation parameters
+   - View real-time results
+
+2. TRD TRAINING TAB (🧠)
+   - Generate training datasets
+   - Train reasoning models
+   - Monitor training progress
+
+3. MODEL INFERENCE TAB (💬)
+   - Load trained models
+   - Ask questions
+   - Get structured reasoning responses
+
+4. SYSTEM MONITOR TAB (📊)
+   - View system information
+   - Check available models
+   - Monitor GPU status
+
+TYPICAL WORKFLOW:
+-----------------
+
+Step 1: Generate Dataset
+   Tab: TRD Training
+   - Set size: 1000
+   - Select teacher: qwen3:30b-a3b
+   - Click "Generate Dataset"
+   - Time: ~3 hours
+
+Step 2: Train Model
+   Tab: TRD Training
+   - Set epochs: 3
+   - Set batch size: 2
+   - Click "Start Training"
+   - Time: ~35 minutes
+
+Step 3: Test Model
+   Tab: Model Inference
+   - Select model: qwen2-1.5b-1k-fixed
+   - Click "Load Model"
+   - Enter question
+   - Click "Generate Response"
+
+INTERFACE HIGHLIGHTS:
+---------------------
+
+✓ Modern dark theme
+✓ Real-time progress tracking
+✓ Background processing (UI stays responsive)
+✓ Automatic error handling
+✓ One-click operations
+✓ Status bar updates
+✓ Comprehensive logging
+
+KEYBOARD SHORTCUTS:
+-------------------
+Ctrl+Q - Quit application
+F5 - Refresh models list
+
+TIPS:
+-----
+- All long operations run in background
+- You can monitor progress in real-time
+- Training logs are displayed live
+- Models are auto-detected
+- GPU info is shown if available
+
+TROUBLESHOOTING:
+----------------
+If GUI doesn't start:
+  pip install PyQt6
+
+If training fails:
+  - Check WSL is running
+  - Verify dataset exists
+  - Check GPU availability
+
+DOCUMENTATION:
+--------------
+See GUI_README.md for detailed documentation
+
+================================================================================

@@ -1,0 +1,9 @@
+{"query": "Explain the physical meaning of wavefunction collapse and how it relates to the measurement problem in quantum mechanics.", "simulation_type": "general", "physics_concepts": ["wavefunction_collapse", "measurement_problem"]}
+{"query": "Derive the time-dependent Schrödinger equation from first principles and explain each term.", "simulation_type": "general", "physics_concepts": ["schrodinger_equation", "time_evolution"]}
+{"query": "What is the difference between pure and mixed quantum states, and how is this reflected in the density matrix formalism?", "simulation_type": "general", "physics_concepts": ["pure_states", "mixed_states", "density_matrix"]}
+{"query": "Explain the Heisenberg uncertainty principle and derive it from the commutation relations.", "simulation_type": "general", "physics_concepts": ["uncertainty_principle", "commutation_relations"]}
+{"query": "What is quantum decoherence and how does it explain the emergence of classical behavior?", "simulation_type": "general", "physics_concepts": ["decoherence", "quantum_to_classical"]}
+{"query": "How can neural networks be trained to respect physical conservation laws, and why is this important for quantum simulations?", "simulation_type": "ml_physics", "physics_concepts": ["physics_informed_ml", "conservation_laws"]}
+{"query": "Explain the challenges of using machine learning to predict quantum observables and how uncertainty quantification helps.", "simulation_type": "ml_physics", "physics_concepts": ["uncertainty_quantification", "ml_validation"]}
+{"query": "What are the advantages and limitations of using ML to accelerate quantum Monte Carlo simulations?", "simulation_type": "ml_physics", "physics_concepts": ["quantum_monte_carlo", "ml_acceleration"]}
+{"query": "How does adaptive sampling improve the efficiency of training ML models for physics simulations?", "simulation_type": "ml_physics", "physics_concepts": ["adaptive_sampling", "active_learning"]}

@@ -1,0 +1,30 @@
+VRAM Optimization Results
+==================================================
+
+Baseline:
+  Peak VRAM: 7.94 GB
+  Training time: 0.5196s
+  Memory saved: 0.00 GB
+
+Gradient Checkpointing:
+  Peak VRAM: 7.94 GB
+  Training time: 0.5733s
+  Memory saved: 0.00 GB
+
+Mixed Precision:
+  Peak VRAM: 7.94 GB
+  Training time: 0.5707s
+  Memory saved: 0.00 GB
+
+Full Optimization:
+  Peak VRAM: 7.94 GB
+  Training time: 0.5234s
+  Memory saved: 0.00 GB
+
+
+Optimization Recommendations:
+1. Always use gradient checkpointing for deep models
+2. Enable mixed precision training when possible
+3. Use set_to_none=True when zeroing gradients
+4. Clear cache between major operations
+5. Use in-place operations where safe

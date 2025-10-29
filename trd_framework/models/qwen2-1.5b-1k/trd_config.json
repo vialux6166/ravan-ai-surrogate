@@ -1,0 +1,10 @@
+{
+  "student_model_name": "Qwen/Qwen2-1.5B-Instruct",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "num_epochs": 3,
+  "batch_size": 2,
+  "learning_rate": 0.0002,
+  "training_time_seconds": 2092.3338289260864,
+  "dataset_size": 998
+}

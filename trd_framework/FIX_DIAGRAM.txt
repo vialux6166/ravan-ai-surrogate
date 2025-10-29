@@ -1,0 +1,134 @@
+================================================================================
+                    EOS TOKEN FIX - VISUAL EXPLANATION
+================================================================================
+
+BEFORE FIX (Current Model):
+---------------------------
+
+Training Data:
+┌─────────────────────────────────────────────────────────────┐
+│ Query: what is quantum physics                              │
+│                                                              │
+│ Response: [structured answer with 6 points]                 │
+│                                                              │
+│ ← NO EOS TOKEN HERE!                                        │
+└─────────────────────────────────────────────────────────────┘
+
+Model Learns:
+┌─────────────────────────────────────────────────────────────┐
+│ ✓ How to generate structured reasoning                      │
+│ ✗ When to stop (never saw an end signal)                    │
+└─────────────────────────────────────────────────────────────┘
+
+Generation Result:
+┌─────────────────────────────────────────────────────────────┐
+│ Query: what is quantum physics                              │
+│                                                              │
+│ Response: [structured answer]                               │
+│                                                              │
+│ Human: What is the difference... ← HALLUCINATED!            │
+│ Assistant: Response: 1. ...      ← KEEPS GOING!             │
+└─────────────────────────────────────────────────────────────┘
+
+
+AFTER FIX (Retrained Model):
+-----------------------------
+
+Training Data:
+┌─────────────────────────────────────────────────────────────┐
+│ Query: what is quantum physics                              │
+│                                                              │
+│ Response: [structured answer with 6 points]</s>             │
+│                                          ↑                   │
+│                                    EOS TOKEN ADDED!          │
+└─────────────────────────────────────────────────────────────┘
+
+Model Learns:
+┌─────────────────────────────────────────────────────────────┐
+│ ✓ How to generate structured reasoning                      │
+│ ✓ When to stop (outputs </s> when done)                     │
+└─────────────────────────────────────────────────────────────┘
+
+Generation Result:
+┌─────────────────────────────────────────────────────────────┐
+│ Query: what is quantum physics                              │
+│                                                              │
+│ Response: [structured answer]</s>                           │
+│                                ↑                             │
+│                          STOPS HERE!                         │
+│                                                              │
+│ [Waiting for next query...]                                 │
+└─────────────────────────────────────────────────────────────┘
+
+
+CODE CHANGES:
+-------------
+
+File: trd_framework/phase2_student_training.py
+
+Change #1 (Line ~105):
+┌─────────────────────────────────────────────────────────────┐
+│ BEFORE:                                                      │
+│   target_text = example['full_response']                    │
+│                                                              │
+│ AFTER:                                                       │
+│   target_text = example['full_response']                    │
+│   target_text = target_text + self.tokenizer.eos_token      │
+│                                ↑                             │
+│                          ADDS </s> TOKEN                     │
+└─────────────────────────────────────────────────────────────┘
+
+Change #2 (Line ~263-267):
+┌─────────────────────────────────────────────────────────────┐
+│ Ensures pad_token = eos_token                                │
+│ Prevents padding from interfering with stopping              │
+└─────────────────────────────────────────────────────────────┘
+
+
+TRAINING FLOW:
+--------------
+
+1. Load Dataset
+   ↓
+2. For each example:
+   - Load query and response
+   - ADD EOS TOKEN ← FIX APPLIED HERE
+   - Tokenize
+   - Create training batch
+   ↓
+3. Train Model
+   - Model sees </s> at end of every response
+   - Learns to output </s> when done
+   ↓
+4. Save Model
+   - Model now knows when to stop!
+
+
+GENERATION FLOW:
+----------------
+
+1. User asks: "what is quantum physics"
+   ↓
+2. Model generates:
+   - Initial Thought
+   - Chain of Reasoning
+   - Identify Flaws
+   - Self-Correction
+   - Final Answer
+   - </s> ← MODEL OUTPUTS THIS
+   ↓
+3. Generation stops when </s> detected
+   ↓
+4. Clean response returned to user
+
+
+SUMMARY:
+--------
+┌─────────────────────────────────────────────────────────────┐
+│ Problem:  Model doesn't know when to stop                   │
+│ Solution: Add </s> token to training data                   │
+│ Result:   Model learns to output </s> when done             │
+│ Action:   Retrain with fixed code (35 minutes)              │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================================

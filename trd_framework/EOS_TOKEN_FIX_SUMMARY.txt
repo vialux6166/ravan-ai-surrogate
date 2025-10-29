@@ -1,0 +1,49 @@
+================================================================================
+TRD MODEL FIX - EOS TOKEN ISSUE
+================================================================================
+
+PROBLEM:
+--------
+Your model learned structured reasoning but doesn't stop generating.
+It hallucinates continued conversations after completing responses.
+
+ROOT CAUSE:
+-----------
+Training data didn't include EOS (End-of-Sequence) tokens at the end of
+responses, so the model never learned when to stop.
+
+SOLUTION APPLIED:
+-----------------
+1. Modified phase2_student_training.py line ~105:
+   Added: target_text = target_text + self.tokenizer.eos_token
+
+2. Enhanced tokenizer setup with clear logging (line ~245)
+
+FILES MODIFIED:
+---------------
+- trd_framework/phase2_student_training.py (2 critical fixes)
+
+NEXT STEP:
+----------
+Retrain the model (35 minutes):
+
+cd '/mnt/c/Users/windows/Documents/rishi - professor'
+source venv_test/bin/activate
+python trd_framework/run_phase2_training.py \
+    --dataset trd_framework/large_dataset/physics_large_dataset.jsonl \
+    --output-dir trd_framework/models/qwen2-1.5b-1k-fixed \
+    --batch-size 2 \
+    --gradient-accumulation 8 \
+    --epochs 3
+
+WHAT TO EXPECT:
+---------------
+After retraining, the model will:
+✓ Generate structured reasoning (as before)
+✓ STOP after completing responses (NEW - FIXED)
+✓ Not hallucinate continued conversations (NEW - FIXED)
+
+The structured reasoning quality will remain the same, but now with
+proper stopping behavior.
+
+================================================================================

@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Export small dataset
+        run: |
+          python scripts/export_dataset.py --out_dir data --num_samples 200 --seed 123
+      - name: Train short run
+        run: |
+          python scripts/train.py --data_dir data --output_dir models/ci --epochs 2 --batch_size 64 --lr 0.001 --seed 123
+      - name: Check artifacts
+        run: |
+          ls -la models/ci

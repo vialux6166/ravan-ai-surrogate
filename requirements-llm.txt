@@ -1,0 +1,26 @@
+# LLM Dependencies for Ravan Quantum-ML System
+# Task 15.1: Install LLM dependencies
+#
+# Install with: pip install -r requirements-llm.txt
+#
+# Requirements:
+# - CUDA 12.1+
+# - 24GB VRAM (RTX 3090 or equivalent)
+# - 70GB disk space for model weights
+
+# Core LLM Libraries
+transformers>=4.35.0        # HuggingFace transformers
+peft>=0.6.0                 # Parameter-Efficient Fine-Tuning (LoRA, QLoRA)
+bitsandbytes>=0.41.0        # 4-bit/8-bit quantization
+accelerate>=0.24.0          # Distributed training and inference
+
+# Tokenization and Serialization
+sentencepiece>=0.1.99       # SentencePiece tokenizer
+protobuf>=3.20.0            # Protocol buffers for model serialization
+
+# Optional: Additional utilities
+einops>=0.7.0               # Tensor operations
+safetensors>=0.4.0          # Safe tensor serialization
+
+# Note: These dependencies are OPTIONAL for the core Ravan system
+# Only install if you plan to use the LLM integration features

@@ -1,0 +1,10 @@
+SIMULATION PERFORMANCE PROFILING
+======================================================================
+
+Schrödinger Solver:     66.55ms
+Quantum Circuit:        3.74ms
+Harmonic Oscillator:    1.10ms
+
+Slowest: Schrödinger Solver
+Fastest: Harmonic Oscillator
+Speed ratio: 60.62x
