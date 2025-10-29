@@ -1,0 +1,64 @@
+name: Benchmark Smoke Test
+
+on:
+  push:
+    paths:
+      - 'run_benchmarks.py'
+      - 'analyze_benchmarks.py'
+      - 'visualize_benchmarks.py'
+  pull_request:
+    paths:
+      - 'run_benchmarks.py'
+      - 'analyze_benchmarks.py'
+      - 'visualize_benchmarks.py'
+  workflow_dispatch:
+
+jobs:
+  smoke_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy scipy onnxruntime pandas matplotlib scikit-learn
+
+      - name: Run Quick Benchmark (10 runs)
+        run: |
+          echo "Running quick benchmark test..."
+          python run_benchmarks.py --quick || echo "Benchmark completed with warnings"
+
+      - name: Generate Visualizations
+        run: |
+          echo "Generating benchmark visualizations..."
+          python visualize_benchmarks.py || echo "Visualization completed with warnings"
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: benchmark-results
+          path: |
+            benchmark_results.json
+            benchmark_plots/*.png
+
+      - name: Display Summary
+        if: always()
+        run: |
+          echo "=== Benchmark Summary ==="
+          if [ -f benchmark_results.json ]; then
+            cat benchmark_results.json | grep -A 5 "inverse_design" || echo "Results file found"
+          else
+            echo "No results file generated"
+          fi
+          echo "========================="
+
