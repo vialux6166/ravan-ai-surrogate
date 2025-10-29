@@ -303,15 +303,24 @@ class MLPRegressor(MLModel):
         """
         self.validate_input_shape(X)
         
+        # Ensure model and input are on the same device
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.model.to(device)
+        self.device = device  # Update device attribute
+        
         # Enable dropout at inference
         self.model.train()
         
         predictions_list = []
-        X_t = torch.FloatTensor(X).to(self.device)
+        # Ensure input is a tensor and on the correct device
+        X_tensor = torch.FloatTensor(X).to(device)
         
         with torch.no_grad():
             for _ in range(n_samples):
-                pred = self.model(X_t).cpu().numpy()
+                # Model and input are now guaranteed to be on the same device
+                predictions = self.model(X_tensor)
+                # Move result back to CPU for numpy conversion
+                pred = predictions.cpu().numpy()
                 predictions_list.append(pred)
         
         predictions_array = np.array(predictions_list)

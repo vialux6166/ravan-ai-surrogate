@@ -335,6 +335,30 @@ ravan/
 |-------|------------|------------|--------------|
 | Qwen 30B | 17.94 GB | 10.90 | 4-bit NF4 |
 
+### 🧠 Inverse Design Benchmarks
+
+**Basin-Hopping + L-BFGS-B Hybrid Optimizer**
+
+Reproduce the inverse-design benchmark:
+
+```bash
+python run_benchmarks.py
+python visualize_benchmarks.py
+```
+
+**Results:**
+- **Success Rate**: 83.0% (83/100 runs)
+- **Mean Time**: 35.8 ms per inverse design
+- **Mean Error**: 0.0102 (error < 0.01 threshold)
+- **Inference**: ONNX CPU = 0.0207 ms (optimal for single predictions)
+
+**Improvements:**
+- 83% success rate (was 0% with naive approach)
+- ~1,230× speedup (44s → 35.8ms per run)
+- Local ONNX inference eliminates HTTP overhead
+
+📖 Full details: [docs/benchmarking.md](docs/benchmarking.md)
+
 ## 📚 Documentation
 
 - **[Configuration Guide](docs/CONFIGURATION_GUIDE.md)** - All configuration options
