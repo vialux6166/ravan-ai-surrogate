@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ravan-sdk"
+version = "0.1.0"
+description = "Official Python SDK for Ravan Quantum-ML Surrogate Engine"
+authors = [{ name = "Ravan Labs" }]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+  "requests>=2.31",
+  "scipy>=1.10",
+  "onnxruntime>=1.17",
+  "matplotlib>=3.7",
+  "numpy>=1.23",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.urls]
+Homepage = "https://github.com/vialux6166/ravan-ai-surrogate"
+Issues = "https://github.com/vialux6166/ravan-ai-surrogate/issues"
+Repository = "https://github.com/vialux6166/ravan-ai-surrogate"
+Documentation = "https://github.com/vialux6166/ravan-ai-surrogate/blob/main/README.md"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ravan_sdk*"]
+
+
